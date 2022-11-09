@@ -1,6 +1,8 @@
 const ErrorCustom = require("../middlewares/errorCustom");
 const BossRaidService = require("../services/bossRaid.service");
 
+const regExp = /[0-9]/;
+
 class BossRaidController {
   bossRaidService = new BossRaidService();
 
@@ -16,6 +18,13 @@ class BossRaidController {
 
   enterRaid = async (req, res, next) => {
     try {
+      const validateUserId = regExp.test(req.body.userId);
+      const validateLevel = regExp.test(req.body.level);
+
+      if (!validateUserId || !validateLevel) {
+        throw new ErrorCustom(400, "형식이 맞지 않습니다.");
+      }
+
       const { userId, level } = req.body;
 
       const enterRaid = await this.bossRaidService.enterRaid(userId, level);
@@ -28,6 +37,13 @@ class BossRaidController {
 
   endRaid = async (req, res, next) => {
     try {
+      const validateUserId = regExp.test(req.body.userId);
+      const validateRaidRecordId = regExp.test(req.body.raidRecordId);
+
+      if (!validateUserId || !validateRaidRecordId) {
+        throw new ErrorCustom(400, "형식이 맞지 않습니다.");
+      }
+
       const { userId, raidRecordId } = req.body;
 
       const endRaid = await this.bossRaidService.endRaid(userId, raidRecordId);
@@ -40,6 +56,12 @@ class BossRaidController {
 
   rank = async (req, res, next) => {
     try {
+      const validateUserId = regExp.test(req.body.userId);
+
+      if (!validateUserId) {
+        throw new ErrorCustom(400, "형식이 맞지 않습니다.");
+      }
+
       const { userId } = req.body;
 
       const userRank = await this.bossRaidService.userRank();
