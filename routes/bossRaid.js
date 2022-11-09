@@ -27,4 +27,8 @@ router.post("/enter", bossRaidController.enterRaid);
     - 시작한 시간으로부터 레이드 제한시간이 지났다면 예외 처리 */
 router.patch("/end", bossRaidController.endRaid);
 
+// 랭킹조회
+// 보스레이드 totalScore 내림차순으로 랭킹을 조회합니다.
+router.get("/topRankerList", bossRaidController.rank);
+
 module.exports = router;

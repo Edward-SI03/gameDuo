@@ -1,5 +1,6 @@
 const { bossRaid } = require("../models");
 const { Op } = require("sequelize");
+const sequelize = require("sequelize");
 
 class BossRaidRepository {
   isEntered = async () => {
@@ -36,6 +37,27 @@ class BossRaidRepository {
       { status: "end", score },
       { where: { userId, raidRecordId } }
     );
+  };
+
+  findAllUser = async () => {
+    const findAllUser = await bossRaid.findAll({
+      attributes: [
+        "userId",
+        "score",
+        [sequelize.fn("sum", sequelize.col("score")), "totalScore"],
+      ],
+      where: { score: { [Op.gt]: 0 } },
+      group: "userId",
+      order: [["userId", "ASC"]],
+    });
+
+    return findAllUser;
+  };
+
+  findOneUser = async (userId) => {
+    const findOneUser = await bossRaid.findOne({ where: { userId } });
+
+    return findOneUser;
   };
 }
 

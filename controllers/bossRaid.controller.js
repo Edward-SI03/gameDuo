@@ -37,6 +37,21 @@ class BossRaidController {
       next(err);
     }
   };
+
+  rank = async (req, res, next) => {
+    try {
+      const { userId } = req.body;
+
+      const userRank = await this.bossRaidService.userRank();
+      const myRank = await this.bossRaidService.myRank(userId, userRank);
+
+      res
+        .status(200)
+        .json({ topRankerInfoList: userRank, myRankingInfo: myRank });
+    } catch (err) {
+      next(err);
+    }
+  };
 }
 
 module.exports = BossRaidController;

@@ -71,6 +71,43 @@ class BossRaidService {
 
     return { msg: `레이드에 성공했습니다. 점수 : ${score}` };
   };
+
+  userRank = async () => {
+    const allUserRank = await this.bossRaidRepository.findAllUser();
+
+    let userRankArr = allUserRank.sort((a, b) => {
+      return b.dataValues.totalScore - a.dataValues.totalScore;
+    });
+
+    let userRank = [];
+    for (let i = 0; i < userRankArr.length; i++) {
+      const list = {
+        ranking: i,
+        userId: userRankArr[i].userId,
+        totalScore: Number(userRankArr[i].dataValues.totalScore),
+      };
+      userRank.push(list);
+    }
+
+    return userRank;
+  };
+
+  myRank = async (userId, userRank) => {
+    const findOneUser = await this.bossRaidRepository.findOneUser(userId);
+
+    if (findOneUser === null) {
+      return { msg: "존재하지 않는 유저입니다." };
+    }
+
+    let myRank;
+    userRank.map((e) => {
+      if (userId === e.userId) {
+        myRank = e;
+      }
+    });
+
+    return myRank;
+  };
 }
 
 module.exports = BossRaidService;
