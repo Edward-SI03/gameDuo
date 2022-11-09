@@ -25,6 +25,18 @@ class BossRaidController {
       next(err);
     }
   };
+
+  endRaid = async (req, res, next) => {
+    try {
+      const { userId, raidRecordId } = req.body;
+
+      const endRaid = await this.bossRaidService.endRaid(userId, raidRecordId);
+
+      res.status(200).json(endRaid);
+    } catch (err) {
+      next(err);
+    }
+  };
 }
 
 module.exports = BossRaidController;

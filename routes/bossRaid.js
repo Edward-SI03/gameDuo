@@ -19,4 +19,12 @@ router.get("/", bossRaidController.statusRaid);
  */
 router.post("/enter", bossRaidController.enterRaid);
 
+// 보스레이드 종료
+/*raidRecordId 종료 처리
+    - 레이드 level에 따른 score 반영
+유효성 검사
+    - 저장된 userId와 raidRecoridId 일치하지 않다면 예외 처리
+    - 시작한 시간으로부터 레이드 제한시간이 지났다면 예외 처리 */
+router.patch("/end", bossRaidController.endRaid);
+
 module.exports = router;

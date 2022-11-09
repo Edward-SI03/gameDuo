@@ -22,6 +22,21 @@ class BossRaidRepository {
 
     return createRaid;
   };
+
+  findOneRaid = async (userId, raidRecordId) => {
+    const findOneRaid = await bossRaid.findOne({
+      where: { userId, raidRecordId },
+    });
+
+    return findOneRaid;
+  };
+
+  updateRaid = async (userId, raidRecordId, score) => {
+    await bossRaid.update(
+      { status: "end", score },
+      { where: { userId, raidRecordId } }
+    );
+  };
 }
 
 module.exports = BossRaidRepository;
