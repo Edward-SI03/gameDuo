@@ -44,8 +44,6 @@ class BossRaidService {
       raidRecordId
     );
 
-    let score = 0;
-
     if (findOneRaid === null) {
       return { msg: "종료할 레이드가 없습니다." };
     }
@@ -55,11 +53,12 @@ class BossRaidService {
     }
 
     if (new Date(findOneRaid.endTime) < new Date()) {
-      await this.bossRaidRepository.updateRaid(userId, raidRecordId, score);
+      await this.bossRaidRepository.updateRaid(userId, raidRecordId);
 
       return { msg: "제한시간 초과로 레이드에 실패했습니다." };
     }
 
+    let score = 0;
     if (findOneRaid.level === 0) {
       score = 20;
     } else if (findOneRaid.level === 1) {
@@ -67,6 +66,7 @@ class BossRaidService {
     } else if (findOneRaid.level === 2) {
       score = 85;
     }
+
     await this.bossRaidRepository.updateRaid(userId, raidRecordId, score);
 
     return { msg: `레이드에 성공했습니다. 점수 : ${score}` };
@@ -75,28 +75,40 @@ class BossRaidService {
   userRank = async () => {
     const allUserRank = await this.bossRaidRepository.findAllUser();
 
-    let userRankArr = allUserRank.sort((a, b) => {
+    if (!allUserRank[0]) {
+      return { msg: "랭킹 기록이 없습니다." };
+    }
+
+    allUserRank.sort((a, b) => {
       return b.dataValues.totalScore - a.dataValues.totalScore;
     });
 
-    let userRank = [];
-    for (let i = 0; i < userRankArr.length; i++) {
-      const list = {
+    let userRankList = [];
+    for (let i = 0; i < allUserRank.length; i++) {
+      const userRankInfo = {
         ranking: i,
-        userId: userRankArr[i].userId,
-        totalScore: Number(userRankArr[i].dataValues.totalScore),
+        userId: allUserRank[i].userId,
+        totalScore: Number(allUserRank[i].dataValues.totalScore),
       };
-      userRank.push(list);
+      userRankList.push(userRankInfo);
     }
 
-    return userRank;
+    return userRankList;
   };
 
   myRank = async (userId, userRank) => {
     const findOneUser = await this.bossRaidRepository.findOneUser(userId);
 
-    if (findOneUser === null) {
+    if (!findOneUser) {
       return { msg: "존재하지 않는 유저입니다." };
+    }
+
+    const findOneUserHistory = await this.bossRaidRepository.findOneUserHistory(
+      userId
+    );
+
+    if (!findOneUserHistory) {
+      return { msg: "유저의 기록이 없습니다." };
     }
 
     let myRank;

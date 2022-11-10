@@ -54,7 +54,7 @@ class BossRaidController {
     }
   };
 
-  rank = async (req, res, next) => {
+  rankRaid = async (req, res, next) => {
     try {
       const validateUserId = regExp.test(req.body.userId);
 

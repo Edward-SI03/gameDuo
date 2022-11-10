@@ -1,6 +1,5 @@
-const { bossRaid } = require("../models");
+const { bossRaid, User, sequelize } = require("../models");
 const { Op } = require("sequelize");
-const sequelize = require("sequelize");
 
 class BossRaidRepository {
   isEntered = async () => {
@@ -55,9 +54,15 @@ class BossRaidRepository {
   };
 
   findOneUser = async (userId) => {
-    const findOneUser = await bossRaid.findOne({ where: { userId } });
+    const findOneUser = await User.findOne({ where: { userId } });
 
     return findOneUser;
+  };
+
+  findOneUserHistory = async (userId) => {
+    const findOneUserHistory = await bossRaid.findOne({ where: { userId } });
+
+    return findOneUserHistory;
   };
 }
 

@@ -29,6 +29,6 @@ router.patch("/end", bossRaidController.endRaid);
 
 // 랭킹조회
 // 보스레이드 totalScore 내림차순으로 랭킹을 조회합니다.
-router.get("/topRankerList", bossRaidController.rank);
+router.get("/topRankerList", bossRaidController.rankRaid);
 
 module.exports = router;
