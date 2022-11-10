@@ -1,6 +1,6 @@
 # GAMEDUO
 
-🎮 보스레이드 PVE 컨텐츠 서비스
+## 🎮 보스레이드 PVE 컨텐츠 서비스
 
 <br>
 
@@ -57,13 +57,13 @@
 
 ## 🎨 ERD
 
-- <img width="299" alt="스크린샷 2022-09-21 오전 1 12 46" src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/d2dbe505-3f1a-4d69-8ad4-098ee5708818/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221110%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221110T090749Z&X-Amz-Expires=86400&X-Amz-Signature=f05e24d018fa978bddd868d85c6c2807b85b9129a3c45de89e49e1ba1dfd4623&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject">
+<img width="299" alt="스크린샷 2022-09-21 오전 1 12 46" src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/d2dbe505-3f1a-4d69-8ad4-098ee5708818/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221110%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221110T090749Z&X-Amz-Expires=86400&X-Amz-Signature=f05e24d018fa978bddd868d85c6c2807b85b9129a3c45de89e49e1ba1dfd4623&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject">
 
 <br>
 
 ## 📜 API DOCS
 
-- [포스트맨 API DOCS](https://documenter.getpostman.com/view/23066446/2s8YemtZ8A)
+[포스트맨 API DOCS](https://documenter.getpostman.com/view/23066446/2s8YemtZ8A)
 
 <br>
 
