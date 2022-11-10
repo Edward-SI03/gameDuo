@@ -1,15 +1,13 @@
-const express = require("express");
-const app = express();
-
 require("dotenv").config();
+const express = require("express");
+const Router = require("./routes/index");
+const app = express();
 const port = process.env.port;
 
 const errorHandler = require("./middlewares/errorHandler");
 
 app.use(express.json());
-const Router = require("./routes/index");
 app.use("/", Router);
-
 app.use(errorHandler);
 
 app.listen(port, () => {
