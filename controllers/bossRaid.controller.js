@@ -2,6 +2,7 @@ const ErrorCustom = require("../middlewares/errorCustom");
 const BossRaidService = require("../services/bossRaid.service");
 
 const regExp = /[0-9]/;
+const regExpLevel = /[0|1|2]/;
 
 class BossRaidController {
   bossRaidService = new BossRaidService();
@@ -19,7 +20,9 @@ class BossRaidController {
   enterRaid = async (req, res, next) => {
     try {
       const validateUserId = regExp.test(req.body.userId);
-      const validateLevel = regExp.test(req.body.level);
+      const validateLevel = regExpLevel.test(req.body.level);
+
+      console.log(validateLevel);
 
       if (!validateUserId || !validateLevel) {
         throw new ErrorCustom(400, "형식이 맞지 않습니다.");
