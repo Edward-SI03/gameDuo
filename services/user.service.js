@@ -10,11 +10,24 @@ class UserService {
   };
 
   userInfo = async (userId) => {
-    const mytotal = await this.userRepository.mytotal(userId);
+    const isUser = await this.userRepository.findOneUser(userId);
+
+    if (!isUser) {
+      return { msg: "존재하지 않는 유저입니다." };
+    }
+
+    let myTotal = await this.userRepository.myTotal(userId);
+
+    if (!myTotal[0]) {
+      return { msg: "유저의 기록이 없습니다." };
+    } else {
+      myTotal = Number(myTotal[0].dataValues.totalScore);
+    }
+
     const myHistory = await this.userRepository.myHistory(userId);
 
     return {
-      totalScore: mytotal,
+      totalScore: myTotal,
       bossRaidHistory: myHistory.map((e) => {
         return {
           raidRecordId: e.raidRecordId,

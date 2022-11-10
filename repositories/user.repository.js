@@ -7,14 +7,20 @@ class UserRepository {
     return userId;
   };
 
-  mytotal = async (userId) => {
+  findOneUser = async (userId) => {
+    const findOneUser = await User.findOne({ where: { userId } });
+
+    return findOneUser;
+  };
+
+  myTotal = async (userId) => {
     const mytotal = await bossRaid.findAll({
       attributes: [[sequelize.fn("sum", sequelize.col("score")), "totalScore"]],
       where: { userId },
       group: "userId",
     });
 
-    return Number(mytotal[0].dataValues.totalScore);
+    return mytotal;
   };
 
   myHistory = async (userId) => {
