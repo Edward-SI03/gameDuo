@@ -14,6 +14,6 @@ router.post("/enter", bossRaidController.enterRaid);
 router.patch("/end", bossRaidController.endRaid);
 
 // 보스레이드 랭킹 조회
-router.get("/topRankerList", bossRaidController.rankRaid);
+router.get("/topRankerList/:userId", bossRaidController.rankRaid);
 
 module.exports = router;

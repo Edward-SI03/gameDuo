@@ -26,7 +26,7 @@ class UserController {
 
       const { userId } = req.params;
 
-      const userInfo = await this.userService.userInfo(userId);
+      const userInfo = await this.userService.userInfo(Number(userId));
 
       res.status(200).json(userInfo);
     } catch (err) {

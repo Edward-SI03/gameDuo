@@ -56,16 +56,19 @@ class BossRaidController {
 
   rankRaid = async (req, res, next) => {
     try {
-      const validateUserId = regExp.test(req.body.userId);
+      const validateUserId = regExp.test(req.params.userId);
 
       if (!validateUserId) {
         throw new ErrorCustom(400, "형식이 맞지 않습니다.");
       }
 
-      const { userId } = req.body;
+      const { userId } = req.params;
 
       const userRank = await this.bossRaidService.userRank();
-      const myRank = await this.bossRaidService.myRank(userId, userRank);
+      const myRank = await this.bossRaidService.myRank(
+        Number(userId),
+        userRank
+      );
 
       res
         .status(200)
